@@ -137,7 +137,7 @@ git pull
 
 It should say "Already up to date."
 
-Let's create a new branch, that can be done using the following command. I like to use "\<name>\_<branch-name>".
+Let's create a new branch, that can be done using the following command. I like to use "\<name>\_<branch-name>". The `-b` option is to create a new branch.
 
 ```
 git checkout -b "aryan_adding-css"
@@ -160,3 +160,38 @@ git commit -m "..."
 ```
 
 Now when we try to push, there will be an error. This is because we are in a different branch and need to set where we want to push our changes. The reccommended command is usually what you want to use that, don't be bothered to memorize it.
+
+With that done, let's check the GitHub page. Notice there are 2 branches now and we can see them both. Click "Create Pull Request". With the pull request, we can allow others to approve or comment on your changes before it is merged to the main branch. You can also add dependencies and security checks to make sure everything is running properly. Now click the arrow beside the "Merge pull request" button and select "Squash and Merge". To explain why, let's imagine a scenario where it took you 72 commmits to finally be satisfied with your work. Maybe along the way you went back on your changes. It isn't ideal to have all your commmits be forced upon everyone else, so it squashes all your commits into 1 commit so it's clean and easy for everyone else.
+
+Once merged, you can delete the branch (normally you should) but I'll keep it for now.
+
+Now let's go back to our main branch. Use the following command:
+
+```
+git checkout main
+```
+
+Notice that it has not yet updated. That is because our changes were merged remotely and not locally. Let's fix this by pulling our changes.
+
+```
+git pull
+```
+
+Now as you can see all the changes are on our local main branch.
+
+## Final Remarks
+
+Git can be very tricky and frustrating to use in the beginning. (I once lost my entire backend with Git) But the good thing is that you can almost always get it back with the commit history (or spamming ctrl-z). One resource I would reccommend is https://gitexplorer.com/. It's not super formal like documentation and makes it easy to find what command you are looking for.
+
+Now in practice, you may need to rebase a lot, and it's hard to show how to do it with one user, but I will explain below how it happens and how to resolve it.
+
+### Git Rebase
+
+Suppose there are 2 users, A and B. A creates a branch from the main branch to make some changes, and so does B. A merges their changes to the main branch. Now B finishes their changes and
+attempts to merge their changes. However, since their changes are reflected onto an older version of the main branch, before A changed it, it must rebase. Thus, the following command must be used.
+
+```
+git rebase
+```
+
+Now, rebasing can sometimes be done automatically, but sometimes manual changes must be done. Suppose A made a change on the same line you made a change on as well. Whose line is the right one? Git can't decide this, so it is a conflict. This is a case where A and B need to communicate and decide how to fix this issue together and decide whether to keep A's change, B's change, none of their changes, or a mix of both of their changes.
