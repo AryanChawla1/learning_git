@@ -191,7 +191,7 @@ Suppose there are 2 users, A and B. A creates a branch from the main branch to m
 attempts to merge their changes. However, since their changes are reflected onto an older version of the main branch, before A changed it, it must rebase. Thus, the following command must be used.
 
 ```
-git rebase
+git rebase 'origin/main'
 ```
 
 Now, rebasing can sometimes be done automatically, but sometimes manual changes must be done. Suppose A made a change on the same line you made a change on as well. Whose line is the right one? Git can't decide this, so it is a conflict. This is a case where A and B need to communicate and decide how to fix this issue together and decide whether to keep A's change, B's change, none of their changes, or a mix of both of their changes.
