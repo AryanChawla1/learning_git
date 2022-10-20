@@ -72,7 +72,7 @@ The checkout and rebase are for working with branches. Checkout allows you to cr
 
 Let's create an HTML page and add it to the remote respository. I'm calling it index.html. I have also added text to the README.md file.
 
-In the HTML file, type html:5 and it should auto-generate some code for you. I added a heading with hello world.
+In the HTML file, type `html:5` and it should auto-generate some code for you. I added a heading with hello world.
 
 ```html
 <!DOCTYPE html>
@@ -94,3 +94,69 @@ Let's reflect this remotely. First we will use this command:
 ```
 git status
 ```
+
+This is used to summarize the status of your changes. It generalizes the changes by the file that has changed. Notice that it knows README.md was altered, and that the HTML file was created, but it doesn't know whether it should track it.
+
+First, let's say that our changes in the README.md are ready to be committed. Through the terminal use:
+
+```
+git add -p
+```
+
+This is an interactive way to see what specific changes are applied for each file. It can be tedious but it is the best way to make sure everything is good. Type y for yes, n for no, the rest are irrelevant. Type y for this case. Now check the status.
+
+Now it sees thatthe changes are ready to be committed. But we still need to consider index.html. Use the following command to track it.
+
+```
+git add index.html
+```
+
+Now they are both considered, so we can commit and then push the changes.
+
+A commit requires a message so others can understand what this commit does. Usually the task (story) code is used and a description of the change. The command to use is
+
+```
+git commit -m "Added HTML Page"
+```
+
+You should see a message that summarizes your changes. Now you can push the changes. Since there is only one branch and you are on that branch, it should work fine.
+
+```
+git push
+```
+
+If we go to our GitHub page, it should be there. You can see the commits in the project and see the commit history.
+
+## Adding the CSS file Using Branch
+
+We will now create a new branch to add our changes, and then merge it back to the main branch. The first thing we want to do is make sure we are updating the latest version.
+
+```
+git pull
+```
+
+It should say "Already up to date."
+
+Let's create a new branch, that can be done using the following command. I like to use "\<name>\_<branch-name>".
+
+```
+git checkout -b "aryan_adding-css"
+```
+
+So now you are in a different branch. To see the branches, use the command:
+
+```
+git branch
+```
+
+Let's create the CSS file and style the heading. Make sure to also add the link so the HTML file can use the CSS file. Make another change to the README.file if you would like.
+
+Repeat the same process as above using these commands:
+
+```
+git status
+git add -p
+git commit -m "..."
+```
+
+Now when we try to push, there will be an error. This is because we are in a different branch and need to set where we want to push our changes. The reccommended command is usually what you want to use that, don't be bothered to memorize it.
